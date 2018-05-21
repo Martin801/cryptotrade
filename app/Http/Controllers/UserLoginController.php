@@ -15,10 +15,12 @@ public function __construct()
 {
 	$this->middleware('guest', ['except' => 'logout']);
 }
+// USER AUTH VIEW
 public function getUserLogin()
 {
 	return view('userLogin');
 }
+//USER AUTH
 public function userAuth(Request $request)
 {
 	$this->validate($request, [

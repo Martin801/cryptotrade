@@ -17,9 +17,9 @@ public function printrr($data)
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//CALLING ALL BOT
 public function britex_bot()
 {
-    
     //+++++++++++++++++++++++++++++++++
 	$to = "aquadevjd@gmail.com";
 	$subject = "Bitcoin Trading Bot";
@@ -30,7 +30,6 @@ public function britex_bot()
 	$header .= "Content-type: text/html\r\n";
 	mail ($to,$subject,$message,$header);
     //++++++++++++++++++++++++++++++++++
-
     $this->bitrex_buy_bot();
     $this->bitrex_sell_bot();
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -38,6 +37,7 @@ public function britex_bot()
     $this->yobit_sell_bot();
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//DYNMAIC CURL FUNCTION FOR ALL THE PROJECT
 public function dynamic_curl($url = '')
 {
 if(!empty($url)){
@@ -63,6 +63,7 @@ BRITREX API BOT
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 */
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BRITREX HEADER DYNAMIC CALL FOR INTERNAL CALL IN THE BRITREX ACCOUNT
 public function britrex_curl_with_header($url,$apisecret)
 {
 if(!empty($url)){
@@ -81,6 +82,7 @@ return FALSE;
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BRITREX URL VALIDATOR
 public function get_britex_url($buy_currency,$sell_currency)
 {
 $url = 'https://bittrex.com/api/v1.1/public/getmarketsummary?market='.$buy_currency.'-'.$sell_currency.'';
@@ -98,6 +100,7 @@ return $url = 0;
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BRITREX BLANCE SECTION
 public function bittrex_balance($apikey,$apisecret,$currency)
 {
 $nonce = time();
@@ -114,6 +117,7 @@ return $obj['result']['Available'];
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// BRITREX BUY API FUNCTION
 public function bittrex_buy($apikey,$apisecret,$symbol,$quant,$rate)
 {
 $nonce = time();
@@ -131,6 +135,7 @@ curl_close($ch);
 return $res;
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// BRITREX SELL API FUNCTION
 public function bittrex_sell($apikey,$apisecret,$symbol,$quant,$rate)
 {
 $nonce = time();
@@ -148,6 +153,7 @@ curl_close($ch);
 return $res;
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// GET ALL THE EXCHNAGE 
 public function get_all_bot_exchange_wise($exchange_id='')
 {
 if(!empty($exchange_id)){
@@ -157,6 +163,7 @@ return 0;
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// RETURN THE API KEY FOR THE USER
 public function get_api_key_for_user($exchange_id,$user_id)
 {
 if(!empty($exchange_id) and !empty($user_id)){
@@ -166,6 +173,7 @@ return 0;
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BRITREX BUY BOT
 public function bitrex_buy_bot()
 {
 $get_bot = $this->get_all_bot_exchange_wise(4);
@@ -220,6 +228,7 @@ DB::table('bots')->where('id', $value->id)->update(['status' => 'Success']);
 }
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//BRITREX SELL BOT
 public function bitrex_sell_bot()
 {
 $get_bot = $this->get_all_bot_exchange_wise(4);
@@ -750,6 +759,7 @@ public function yobit_blance($apikey,$apisecret,$currency)
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// URL VALIDATION
 public function get_youbit_url($buy_currency,$sell_currency)
 {
 	$url = 'https://yobit.net/api/3/trades/'.$buy_currency.'_'.$sell_currency.'';
@@ -767,6 +777,7 @@ public function get_youbit_url($buy_currency,$sell_currency)
 	}
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//YOBIT BUY
 public function yobit_buy_bot()
 {
 
@@ -814,6 +825,7 @@ DB::table('bots')->where('id', $value->id)->update(['status' => 'Success']);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// YOUBIT SELL
 public function yobit_sell_bot()
 {
 $get_bot = $this->get_all_bot_exchange_wise(3);
